@@ -4,19 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ingredient {
-	
-	public static enum Type { FRUIT, VEGETABLE, BASE, MISC, ADDON };
+
+	public static enum Type {
+		FRUIT, VEGETABLE, BASE, MISC, ADDON
+	};
 
 	protected String name;
 	protected Type type;
 	protected double cost = 0d;
-	
+	protected int qty = 0;
+
 	@Override
 	public boolean equals(Object obj) {
-		if(!(obj instanceof Ingredient)){
+		if (!(obj instanceof Ingredient)) {
 			return false;
 		}
-		
+
 		return ((Ingredient) obj).name.equalsIgnoreCase(this.name);
 	}
 
@@ -24,8 +27,8 @@ public class Ingredient {
 	public int hashCode() {
 		return this.name.toLowerCase().hashCode();
 	}
-	
-	public List<String> getInstructions(){
+
+	public List<String> getInstructions() {
 		List<String> instructions = new ArrayList<String>();
 		instructions.add("Add " + this.type + ":" + this.name);
 		return instructions;
@@ -33,7 +36,7 @@ public class Ingredient {
 
 	@Override
 	public String toString() {
-		return this.type + " " + this.name;
+		return String.format("%s %s (%d on hand)", type, name, qty);
 	}
 
 	public String getName() {
@@ -59,4 +62,13 @@ public class Ingredient {
 	public void setType(Type type) {
 		this.type = type;
 	}
+
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+
 }
